@@ -1,0 +1,168 @@
+.logo img {
+    max-height: 60px !important; /* Ubah angka 55px ini sesuai seleramu */
+}
+
+@media (max-width: 868px) {
+  .logo img {
+    max-height: 45px !important; /* Perkecil ukuran logo di layar mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    max-height: 35px !important; /* Perkecil ukuran logo di layar mobile */
+  }
+}
+
+
+.text-alamat {
+  font-size: 13px !important; /* ubah sesuai kebutuhan */
+  line-height: 1.4; /* biar lebih rapi */
+  display: inline-block; /* biar <br> tetap rapi */
+}
+
+.navation {
+  background-color: #000000; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  z-index: 1000; 
+  border: none; 
+  position: sticky; 
+  top: 0;
+  color: #ffffff;
+}
+
+.superior-nav {
+  background-color: #ffffff; 
+  border: none; 
+  top: 0;
+}
+
+
+/* fix size slider 
+Menetapkan tinggi yang tetap untuk setiap slide.
+     Anda bisa menggunakan 'px', '%', atau unit lain.
+     '50vh' berarti 50% dari tinggi viewport/layar, ini membuatnya responsif.
+*/
+/* .carousel-item {
+  height: 600px; 
+} */
+
+.carousel-item img {
+  
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+
+img.logo-footer {
+  max-height: 30px;
+  height: auto;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  img.logo-footer {
+    max-height: 60px;
+  }
+}
+
+@media (min-width: 1200px) {
+  img.logo-footer {
+    max-height: 60px;
+  }
+}
+
+.bg-fhmotor {
+  background-color: #1c1b1b !important; /* Ganti dengan warna yang diinginkan */
+}
+
+
+/* navigasi */
+
+.on-page {
+  color: #ededed !important; /* Ganti dengan warna yang diinginkan */
+  font-weight: bold !important;
+}
+
+.cart-btn:hover {
+  background-color: #a41616 !important; /* Ganti dengan warna yang diinginkan */
+  color: #fff !important;
+  border: none !important; /* Ganti dengan warna yang diinginkan */
+}
+
+
+
+ /* Floating Button */
+  #wa-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+#wa-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+#wa-button.active {
+  background: #d9534f; /* merah pas jadi X */
+}
+
+#wa-box {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 280px;
+  max-height: 350px; /* biar bisa scroll */
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.wa-header {
+  background: #25D366;
+  color: #fff;
+  padding: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.wa-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.wa-contact {
+  display: block;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  text-decoration: none;
+}
+
+.wa-contact i {
+  margin-right: 8px;
+  color: #25D366;
+}
+.wa-contact:hover {
+  background: #f5f5f5;
+}

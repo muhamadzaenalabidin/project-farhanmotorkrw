@@ -31,25 +31,20 @@
           <!-- end text -->
 
           <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> TOYOTA
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
                 </div>
               </div>
             </div>
@@ -57,25 +52,20 @@
           <!-- End Product 1 -->
 
           <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> TOYOTA
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
                 </div>
               </div>
             </div>
@@ -83,25 +73,20 @@
           <!-- End Product 1 -->
 
           <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> TOYOTA
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
                 </div>
               </div>
             </div>
@@ -109,25 +94,146 @@
           <!-- End Product 1 -->
 
           <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> TOYOTA
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
                 </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 1 -->
+
+          <!-- Product 1 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> TOYOTA
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 1 -->
+
+          <!-- Product 1 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> TOYOTA
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 1 -->
+
+          <!-- Product 1 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> TOYOTA
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 1 -->
+
+          <!-- Product 1 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> TOYOTA
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 1 -->
+
+          <!-- Product 1 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> TOYOTA
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 1 -->
+
+          <!-- Product 1 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> TOYOTA
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
                 </div>
               </div>
             </div>

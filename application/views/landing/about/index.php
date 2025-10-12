@@ -5,15 +5,6 @@
 
     <div class="container mx-10" data-aos="fade-up" data-aos-delay="100">
 
-      <!-- Logo -->
-      <div class="row justify-content-center mb-3">
-        <div class="col-lg-6 text-center">
-          <img src="<?= base_url('assets/images/logos/'); ?>fm-logo.jpg" 
-               alt="Logo Farhan Motor Karawang" 
-               class="img-fluid mb-4 rounded shadow">
-        </div>
-      </div>
-
       <!-- About Content -->
       <div class="row gy-4 align-items-center justify-content-center">
         <div class="col-lg-6">

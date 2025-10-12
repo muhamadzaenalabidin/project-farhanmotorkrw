@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-	<!--begin::Head-->
-	<head>
-<base href="<?= base_url(); ?>" />
-		<meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>Administrator</title>
-        <meta name="description" content="">
-        <meta name="keywords" content="">
 
-        <!-- Favicons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
-        <link rel="manifest" href="assets/images/favicon/site.webmanifest">
+<base href="<?php echo base_url(); ?>" />
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - Farhan Motor</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url('assets/images/favicon/')?>apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('assets/images/favicon/')?>favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/images/favicon/')?>favicon-16x16.png">
+  <link rel="manifest" href="<?= base_url('assets/images/favicon/')?>site.webmanifest">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/dash/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/dash/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/dash/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/dash/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/dash/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/dash/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/dash/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="assets/vendor/fa/css/all.min.css">
+
+  <!-- sweetalert2 -->
+  <link rel="stylesheet" href="assets/vendor/sweetalert/sweetalert2.min.css">
 
 
-		<!--begin::Fonts(mandatory for all pages)-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-		<!--end::Fonts-->
-		<!--begin::Vendor Stylesheets(used for this page only)-->
-		<link href="assets/ui/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/ui/assets/plugins/custom/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
-		<!--end::Vendor Stylesheets-->
-		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-		<link href="assets/ui/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/ui/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-		<!--end::Global Stylesheets Bundle-->
-		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
-	</head>
-	<!--end::Head-->
-	<!--begin::Body-->
-	<body id="kt_body" class="aside-enabled">
-		<!--begin::Theme mode setup on page load-->
-		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
-		<!--end::Theme mode setup on page load-->
-		<!--begin::Main-->
-		<!--begin::Root-->
-		<div class="d-flex flex-column flex-root">
-			<!--begin::Page-->
-			<div class="page d-flex flex-row flex-column-fluid"></div>
+   <!-- fileupload -->
+   <link rel="stylesheet" href="assets/vendor/fileinput/fileinput.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/dash/css/style.css" rel="stylesheet">
+
+  <!-- css custom -->
+   <link rel="stylesheet" href="assets/dash/css/custom.css">
+</head>
+
+<body>

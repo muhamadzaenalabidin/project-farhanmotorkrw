@@ -50,220 +50,221 @@
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-
         <div class="row g-5">
 
           <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> TOYOTA
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">TOYOTA RAIZE 1.0T GR SPORT 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 275.000.000</span>
                 </div>
               </div>
             </div>
           </div>
           <!-- End Product 1 -->
 
-          <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <!-- Product 2 -->
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> HONDA
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">HONDA HR-V RS TURBO 2024</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 455.000.000</span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- End Product 1 -->
+          <!-- End Product 2 -->
 
-          <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <!-- Product 3 -->
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
                   <i class="bi bi-car-front"></i> HYUNDAI
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">HYUNDAI CRETA ACTIVE 1.5 IVT</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 385.000.000</span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- End Product 1 -->
+          <!-- End Product 3 -->
 
-          <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <!-- Product 4 -->
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> SUZUKI
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">SUZUKI GRAND VITARA HYBRID</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 412.000.000</span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- End Product 1 -->
+          <!-- End Product 4 -->
 
-          <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <!-- Product 5 -->
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> NISSAN
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">NISSAN KICKS e-POWER PREMIUM</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 475.000.000</span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- End Product 1 -->
+          <!-- End Product 5 -->
 
-          <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <!-- Product 6 -->
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> MITSUBISHI
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">MITSUBISHI XPANDER CROSS 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 340.000.000</span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- End Product 1 -->
+          <!-- End Product 6 -->
 
-          <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <!-- Product 7 -->
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> MAZDA
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">MAZDA CX-5 ELITE 2.5 AT</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 620.000.000</span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- End Product 1 -->
+          <!-- End Product 7 -->
 
-          <!-- Product 1 -->
-          <div class="col-lg-4 col-md-6">
+          <!-- Product 8 -->
+          <div class="col-6 col-lg-3 col-md-6">
             <div class="product-item">
               <div class="product-image">
-                <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
-                <a href="<?= base_url('landing/detailproduct'); ?>" class="btn cart-btn">Lihat Detail</a>
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
               </div>
-              
               <div class="product-info">
                 <div class="product-category">
-                  <i class="bi bi-car-front"></i> HYUNDAI
+                  <i class="bi bi-car-front"></i> WULING
                 </div>
-                <h4 class="product-name"><a href="product-details.html">HYUNDAI SANTA FE NEW MODEL 1.6 HYBRID</a></h4>
-                
-                <div class="product-price">
-                  <span class="current-price text-success fw-bold">Rp 2.000.000</span>
-                </div>
-                <div class="product text-sm">
-                  <strong>Transmisi : </strong><span class="text-muted">Automatic</span><br>
-                  <strong>Tahun : </strong><span class="text-muted">2020</span>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">WULING AIR EV LONG RANGE</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 315.000.000</span>
                 </div>
               </div>
             </div>
           </div>
-          
+          <!-- End Product 8 -->
+
+          <!-- Product 9 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> BMW
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">BMW X1 sDRIVE18i xLINE 2024</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 915.000.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 9 -->
+
+          <!-- Product 10 -->
+          <div class="col-6 col-lg-3 col-md-6">
+            <div class="product-item">
+              <div class="product-image">
+                <a href="landing/detailproduct">
+                  <img src="<?= base_url('assets/images/cars/'); ?>product-1.jpeg" alt="Product Image" class="img-fluid" loading="lazy">
+                </a>
+              </div>
+              <div class="product-info">
+                <div class="product-category">
+                  <i class="bi bi-car-front"></i> MERCEDES-BENZ
+                </div>
+                <h4 class="product-name"><a href="<?= base_url('landing/detailproduct')?>">MERCEDES A200 AMG LINE 2023</a></h4>
+                <div class="product-price text-center">
+                  <span class="current-price text-success fw-bold">Rp 890.000.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product 10 -->
 
         </div>
-
       </div>
+
 
     </section>
 </main>

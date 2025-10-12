@@ -1,0 +1,85 @@
+/* custom aside */
+
+.bg-fm {
+    background-color: #343a40 !important;
+}
+
+.bg-fm-sub {
+    background-color: #343a40 !important;
+    color: rgb(158, 158, 158) !important;
+}
+
+.bg-fm-sub i {
+    color: rgb(158, 158, 158) !important;
+}
+
+.bg-fm-aktif,
+.bg-fm-aktif i {
+    background-color: #393f45 !important;
+    color: white !important;
+}
+
+.bg-fm-sub:hover,
+.bg-fm-sub:hover i {
+    color: white !important;
+}
+/* end custom aside */
+
+
+/* form input product */
+.progress-tracker {
+  display: flex;
+  align-items: center; /* ini penting: bikin garis sejajar vertikal sama titik */
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.circle {
+  width: 26px;
+  height: 26px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  z-index: 1;
+}
+
+.step.active .circle {
+  background: #007bff;
+}
+
+.line {
+  flex: 1;
+  height: 4px;
+  background: #e5e5e5;
+  margin: 0 8px;
+  position: relative;
+  top: 0; /* pastikan ini gak geser ke bawah */
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.line.active {
+  background: #007bff;
+}
+
+.label {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #444;
+}
+
+
+
+

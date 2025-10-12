@@ -18,20 +18,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// floating button whatapp
-const waButton = document.getElementById("wa-button");
-const waBox = document.getElementById("wa-box");
-const waIcon = waButton.querySelector("i");
+// hilangkan garis header
 
-waButton.addEventListener("click", () => {
-  waBox.classList.toggle("d-none");
-  waButton.classList.toggle("active");
 
-  if (waButton.classList.contains("active")) {
-    waIcon.classList.remove("bi-whatsapp");
-    waIcon.classList.add("bi-x");
+  // Fungsi untuk sembunyikan garis pas layar mengecil
+function handleDividerDisplay() {
+  const divider = document.getElementById('header-divider');
+  if (window.innerWidth < 1200) {
+    divider.style.display = 'none';
   } else {
-    waIcon.classList.remove("bi-x");
-    waIcon.classList.add("bi-whatsapp");
+    divider.style.display = 'block';
   }
-});
+}
+
+// Jalankan saat halaman load
+window.addEventListener('load', handleDividerDisplay);
+// Jalankan setiap kali ukuran layar berubah
+window.addEventListener('resize', handleDividerDisplay);

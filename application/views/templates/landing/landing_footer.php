@@ -13,7 +13,7 @@
           WEBSITE RESMI
         </span>
         <span class="h6 d-block mt-4">
-          <strong>FAHMI MOTOR KARAWANG</strong> <br> <span class="fw-light mt-3">Jual-Beli Mobil Bekas Berkualitas</span>
+          <strong>FARHAN MOTOR KARAWANG</strong> <br> <span class="fw-light mt-3">Jual-Beli Mobil Bekas Berkualitas</span>
         </span>
         <div class="footer-address mt-3">
           <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>Jl. Rangga gede no.18, gempol-tanjungpura, Karawang 41374</p>
@@ -40,7 +40,7 @@
       
       <!-- Copyright -->
       <div class="text-center text-md-start mb-2 mb-md-0">
-        <small>© 2025 <strong>Fahmi Motor Karawang</strong>. All Rights Reserved.</small>
+        <small>&copy; Copyright <strong><span>Farhan Motor Karawang</span></strong>. All Rights Reserved</small>
       </div>
 
     </div>
@@ -50,57 +50,10 @@
 
 <!-- whatapps -->
 
-<div id="wa-float">
-  <div id="wa-button">
-    <i class="bi bi-whatsapp"></i>
-  </div>
+<a href="https://wa.me/6281234567890" target="_blank" id="wa-float">
+  <i class="bi bi-whatsapp"></i>
+</a>
 
-  <div id="wa-box" class="d-none">
-    <div class="wa-header">
-      <span>Start a Conversation</span>
-    </div>
-    <div class="wa-body">
-      <!-- List kontak -->
-      <a href="https://wa.me/6281234567890" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Purwanto
-      </a>
-      <a href="https://wa.me/6289876543210" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Ridho
-      </a>
-      <a href="https://wa.me/6282233445566" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Duta
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <a href="https://wa.me/6283344556677" target="_blank" class="wa-contact">
-        <i class="bi bi-whatsapp"></i> Bian
-      </a>
-      <!-- Tambahin kontak lain sebanyak apapun -->
-    </div>
-  </div>
-</div>
 
 <!-- whatapp -->
 

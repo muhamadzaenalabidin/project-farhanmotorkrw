@@ -53,7 +53,7 @@
             <div class="contact-content">
               <h4>Ada pertanyaan tentang syarat dan ketentuan?</h4>
               <p>Jika Anda memiliki pertanyaan tentang syarat dan ketentuan ini, silakan hubungi kami.</p>
-              <a href="#" class="contact-link">Hubungi Dukungan</a>
+              <a href="contact" class="contact-link">Hubungi Dukungan</a>
             </div>
           </div>
         </div>

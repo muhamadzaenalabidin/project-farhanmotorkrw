@@ -2,10 +2,10 @@ $("#file-1").fileinput({
     theme: "fa5",
     language: "id",
     allowedFileExtensions: ['jpg', 'jpeg', 'png'],
-    showUpload: false,       // ✅ biar pakai tombol submit
+    showUpload: false,      
     showRemove: true,
     maxFileSize: 2048,
-    maxFileCount: 5,
+    maxFileCount: 25,
     browseOnZoneClick: true,
     fileActionSettings: {
       showRemove: true,

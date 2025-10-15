@@ -12,38 +12,20 @@
 <section class="section dashboard">
 	<div class="row">
 		<div class="col-lg-10 col-12">
-			<div class="progress-tracker align-items-center mb-4">
-				<div class="step active">
-					<div class="circle"><i class="fa-solid fa-dot-circle"></i></div>
-					<div class="label">Data Unit</div>
-				</div>
-				<div class="line"></div>
-				<div class="step">
-					<div class="circle"><i class="fa-solid fa-check"></i></div>
-					<div class="label">Gambar Unit</div>
-				</div>
-				<div class="line"></div>
-				<div class="step">
-					<div class="circle"><i class="fa-solid fa-check"></i></div>
-					<div class="label">Thumbnail Unit</div>
-				</div>
-			</div>
-
-
 
 			<div class="card">
 				<div class="card-body">
 				<h6 class="card-title">Data Unit</h6>
-				<p class="card-text text-sm fw-light text-secondary mb-5">Silahkan isi data unit dan pastikan semua data terisi dengan benar.</p>
+				<p class="card-text text-sm fw-light text-secondary mb-5">Silahkan perbarui data unit dan pastikan semua data terisi dengan benar.</p>
 
-				<!-- Multi Columns Form -->
-				<!-- <form class="row g-3" id="formProduk" enctype="multipart/form-data" method="post"> -->
-					<form class="row g-3" id="formProduk" method="post" action="<?= base_url('admin/tambah_product') ?>">
+					<form class="row g-3" id="formProduk" method="post" action="<?= base_url('admin/edit_data_unit/'.$units->id_unit) ?>">
+
+                    <div><input type="hidden" name="id_unit" value="<?= $units->id_unit; ?>"></div>
 					
 					<!-- nama unit -->
 					<div class="col-md-12">
-					<label for="inputName5" class="form-label">Nama Unit *</label>
-					<input type="text" class="form-control" id="inputName5" name="namaUnit" autocomplete="off" placeholder="Nama Unit..." value="<?= set_value('namaUnit'); ?>">
+					<label for="inputName5" class="form-label">Nama Unit</label>
+					<input type="text" class="form-control" id="inputName5" name="namaUnit" autocomplete="off" placeholder="Nama Unit..." value="<?= $units->nama_unit; ?>">
 					<div class="text-sm fw-light text-danger">
                       <?= form_error('namaUnit') ?>
                     </div>
@@ -57,7 +39,7 @@
 						<select class="form-select" name="merk">
 						<option disabled <?= set_value('merk') == '' ? 'selected' : ''; ?>>Pilih merk unit...</option>
 						<?php foreach ($merk as $m): ?>
-							<option value="<?= $m['id_merk']; ?>" <?= set_value('merk') == $m['id_merk'] ? 'selected' : ''; ?>>
+							<option value="<?= $m['id_merk']; ?>" <?= $units->id_merk == $m['id_merk'] ? 'selected' : ''; ?>>
 							<?= $m['nama_merk']; ?>
 							</option>
 						<?php endforeach; ?>
@@ -72,7 +54,7 @@
 					<!-- warna unit -->
 					<div class="col-md-6">
 					<label class="form-label">Warna *</label>
-					<input type="text" class="form-control" name="warna" placeholder="Warna Unit..." autocomplete="off" value="<?= set_value('warna'); ?>">
+					<input type="text" class="form-control" name="warna" placeholder="Warna Unit..." autocomplete="off" value="<?= $units->warna; ?>">
 					<div class="text-sm fw-light text-danger">
                       <?= form_error('warna') ?>
                     </div>
@@ -85,7 +67,7 @@
 					<select class="form-select" name="tahun" required>
 						<option disabled <?= set_value('tahun') == '' ? 'selected' : ''; ?>>Pilih Tahun..</option>
 						<?php foreach ($years as $year): ?>
-						<option value="<?= $year; ?>" <?= set_value('tahun') == $year ? 'selected' : ''; ?>>
+						<option value="<?= $year; ?>" <?= $units->tahun == $year ? 'selected' : ''; ?>>
 							<?= $year; ?>
 						</option>
 						<?php endforeach; ?>
@@ -107,7 +89,7 @@
 							type="radio" 
 							name="transmisi" 
 							value="manual" 
-							<?= set_value('transmisi', 'manual') == 'manual' ? 'checked' : ''; ?>>
+							<?= $units->transmisi == 'manual' ? 'checked' : ''; ?>>
 						<label class="form-check-label">Manual</label>
 						</div>
 						<div class="form-check">
@@ -116,7 +98,7 @@
 							type="radio" 
 							name="transmisi" 
 							value="automatic" 
-							<?= set_value('transmisi') == 'automatic' ? 'checked' : ''; ?>>
+							<?= $units->transmisi == 'automatic' ? 'checked' : ''; ?>>
 						<label class="form-check-label">Automatic</label>
 						</div>
 						<div class="text-sm fw-light text-danger">
@@ -131,7 +113,7 @@
 					<label for="inputAddress5" class="form-label">Harga Unit *</label>
 					<div class="input-group">
                       <span class="input-group-text" id="basic-addon1">Rp.</span>
-                      <input type="number" class="form-control" placeholder="Harga Mobil Tanpa Titik" name="harga" value="<?= set_value('harga'); ?>">
+                      <input type="number" class="form-control" placeholder="Harga Mobil Tanpa Titik" name="harga" value="<?= $units->harga; ?>">
                     </div>
 					<div class="text-sm fw-light text-danger">
 						<?= form_error('harga') ?>
@@ -142,7 +124,7 @@
 					<div class="col-12">
 					<label class="form-label">Deskripsi</label>
 					<div id="editor-container" style="height: 150px; border: 1px solid gray; border-radius: 3px;">
-						<?= htmlspecialchars_decode(set_value('deskripsi')); ?>
+						<?= $units->deskripsi; ?>
 					</div>
 
 					<textarea id="deskripsi" name="deskripsi" class="form-control mt-2" rows="3" hidden></textarea>
@@ -150,7 +132,7 @@
 
 
 					<div class="text-star mt-3">
-						<button type="submit" class="btn btn-primary btn-sm">Tambah</button>
+						<button type="submit" class="btn btn-primary btn-sm">Simpan</button>
 						<a href="<?= base_url('admin/products') ?>" class="btn btn-warning btn-sm">Kembali</a>
 					
 					</div>

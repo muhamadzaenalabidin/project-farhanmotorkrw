@@ -44,7 +44,7 @@
 	  <li class="nav-heading text-muted">Data Product</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed bg-fm-sub" href="#">
+        <a class="nav-link collapsed bg-fm-sub <?= $page == 'merk' ? 'bg-fm-aktif' : '' ?>" href="<?= base_url('admin/merk') ?>">
           <i class="bi bi-list-nested"></i>
           <span>Merk Mobil</span>
         </a>

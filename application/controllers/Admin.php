@@ -11,6 +11,7 @@ class Admin extends CI_Controller {
         $this->load->model('AdminMerk');
         $this->load->model('AdminTahun');
         $this->load->model('AdminGambar');
+        $this->load->model('AdminKelolaMerk');
     }
 
     public function index()
@@ -27,6 +28,7 @@ class Admin extends CI_Controller {
 
     public function products() {
         $data['page'] = 'stocks';
+        $data['products'] = $this->AdminKelolaProducts->getAllProducts();
 
         $this->load->view('templates/admin/admin_top');
         $this->load->view('templates/admin/admin_header');
@@ -80,71 +82,10 @@ class Admin extends CI_Controller {
         $this->load->view('templates/admin/admin_footer');
     }
 
-    // public function do_upload(){
-    // $id_unit = $this->input->post('id_unit');
-    // $count   = count($_FILES['images']['name']);
-
-    // $config['upload_path']   = './storage/units/';
-    // $config['allowed_types'] = 'jpg|jpeg|png';
-    // $config['max_size']      = 2048; // 2MB
-
-    // $this->load->library('upload');
-
-    // var_dump($count);
-    // die();
-
-    // $errors = [];
-    // $uploaded_count = 0;
-
-    // for ($i = 0; $i < $count; $i++) {
-    //     if (!empty($_FILES['images']['name'][$i])) {
-    //         // Set ulang untuk tiap file
-    //         $_FILES['file']['name']     = $_FILES['images']['name'][$i];
-    //         $_FILES['file']['type']     = $_FILES['images']['type'][$i];
-    //         $_FILES['file']['tmp_name'] = $_FILES['images']['tmp_name'][$i];
-    //         $_FILES['file']['error']    = $_FILES['images']['error'][$i];
-    //         $_FILES['file']['size']     = $_FILES['images']['size'][$i];
-
-    //         // Nama file unik
-    //         $ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
-    //         $new_name = $id_unit . '_' . time() . '_' . uniqid() . '.' . $ext;
-    //         $config['file_name'] = $new_name;
-
-    //         $this->upload->initialize($config);
-
-    //         if ($this->upload->do_upload('file')) {
-    //             $data_upload = $this->upload->data();
-    //             $nama_file   = $data_upload['file_name'];
-
-    //             $data_insert = [
-    //                 'id_unit'     => $id_unit,
-    //                 'nama_gambar' => $nama_file,
-    //                 'thumbnail'   => 0
-    //             ];
-
-    //             $this->AdminGambar->insert_gambar($data_insert);
-    //             $uploaded_count++;
-                
-    //         } else {
-    //             $errors[] = $_FILES['file']['name'] . ': ' . strip_tags($this->upload->display_errors('', ''));
-    //         }
-    //     }
-    // }
-
-    // // ✅ Balikin ke form upload kalau ada error
-    // if (!empty($errors)) {
-    //     $error_message = 'Gagal upload beberapa file:<br>' . implode('<br>', $errors);
-    //     $this->session->set_flashdata('error', $error_message);
-    //     redirect('admin/product_images/' . $id_unit);
-    // } else {
-    //     $this->session->set_flashdata('success', $uploaded_count . ' gambar berhasil diupload!');
-    //     redirect('admin/product_images/' . $id_unit);
-    // }
-// }
-
-public function uploadImage() { 
+    
+    public function uploadImage() { 
         $id_unit = $this->input->post('id_unit');
-        $files = $_FILES;
+        $files   = $_FILES;
 
         $count = count($_FILES['files']['name']);
         $upload_path = './storage/units/';
@@ -157,143 +98,423 @@ public function uploadImage() {
         $config['allowed_types'] = 'jpg|jpeg|png';
         $config['max_size']      = 2048;
 
+        $allowed_extensions = ['jpg','jpeg','png']; // ✅ list ekstensi yang boleh
         $this->load->library('upload');
 
-        $errors = [];
+        $errors   = [];
         $uploaded = 0;
+        $hasFile  = false;
 
-        for($i = 0; $i < $count; $i++){
-            if(!empty($files['files']['name'][$i])){
+        // ✅ Cek apakah user memilih file
+        for ($i = 0; $i < $count; $i++) {
+            if (!empty($files['files']['name'][$i])) {
+                $hasFile = true;
+                break;
+            }
+        }
 
-                // Set data upload per file
+        if (!$hasFile) {
+            $this->session->set_flashdata('error', 
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Terjadi Kesalahan, silahkan coba lagi.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('admin/product_images/'.$id_unit);
+            return;
+        }
+
+        // Proses upload
+        for ($i = 0; $i < $count; $i++) {
+            if (!empty($files['files']['name'][$i])) {
+
+                $originalName = $files['files']['name'][$i];
+                $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+                // Validasi ekstensi manual
+                if (!in_array($ext, $allowed_extensions)) {
+                    $errors[] = "$originalName : ekstensi file tidak diizinkan.";
+                    continue;
+                }
+
                 $_FILES['file']['name']     = $files['files']['name'][$i];
                 $_FILES['file']['type']     = $files['files']['type'][$i];
                 $_FILES['file']['tmp_name'] = $files['files']['tmp_name'][$i];
                 $_FILES['file']['error']    = $files['files']['error'][$i];
                 $_FILES['file']['size']     = $files['files']['size'][$i];
 
-                $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
                 $newName = uniqid('img_').'.'.$ext;
                 $config['file_name'] = $newName;
 
                 $this->upload->initialize($config);
 
-                if($this->upload->do_upload('file')){
+                if ($this->upload->do_upload('file')) {
                     $uploadData = $this->upload->data();
                     $file_name  = $uploadData['file_name'];
 
                     $this->db->insert('gambar', [
                         'id_unit'     => $id_unit,
                         'nama_gambar' => $file_name,
-                        'thumbnail'   => base_url('storage/units/'.$file_name)
+                        'thumbnail'   => 'not_set',
+                        'status_gambar' => 'deactive'
                     ]);
 
                     $uploaded++;
                 } else {
-                    $errors[] = $_FILES['file']['name'].' : '.$this->upload->display_errors('', '');
+                    $errors[] = $originalName.' : '.$this->upload->display_errors('', '');
                 }
             }
         }
 
-        if (!empty($errors)) {
-            $this->session->set_flashdata('error', implode('<br>', $errors));
+        // Tampilkan pesan sesuai hasil upload
+        if ($uploaded === 0) {
+            $this->session->set_flashdata('error', 
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+                . (!empty($errors) ? implode('<br>', $errors) : 'Tidak ada file yang berhasil diupload.') .
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
         } else {
-            $this->session->set_flashdata('success', $uploaded.' gambar berhasil diupload!');
+            $alertMsg = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            '.$uploaded.' gambar berhasil diupload!';
+            if (!empty($errors)) {
+                $alertMsg .= '<br><span class="text-danger">'.implode('<br>', $errors).'</span>';
+            }
+            $alertMsg .= '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+
+            $this->session->set_flashdata('success', $alertMsg);
         }
 
-        redirect('admin/product_images/'.$id_unit);
+        redirect('admin/product_thumbnail/'.$id_unit);
     }
 
 
 
 
+    public function product_thumbnail($id_unit){
+        $data['page'] = 'stocks';;
+
+        $data['units']    = $this->AdminKelolaProducts->GetNameUnit($id_unit);
+        $data['images']  = $this->AdminGambar->getGambarByUnit($id_unit);
+
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/stock-mobil/tambah-mobil/set_thumbnail', $data);
+        $this->load->view('templates/admin/admin_footer');
+    }
+
+
+    public function set_thumbnail(){
+        $id_unit    = $this->input->post('id_unit');
+        $id_gambar  = $this->input->post('thumbnail');
+
+        // Cek kalau gak ada yang dipilih
+        if (empty($id_gambar)) {
+            $this->session->set_flashdata('error', '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Gagal! Kamu belum memilih gambar untuk thumbnail.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+            redirect('admin/product_thumbnail/'.$id_unit);
+            return;
+        }
+
+        // Reset semua gambar unit jadi 'not_set'
+        $this->db->where('id_unit', $id_unit);
+        $this->db->update('gambar', ['thumbnail' => 'not_set', 'status_gambar' => 'deactive']);
+
+        // Set thumbnail yang dipilih
+        $this->db->where('id_gambar', $id_gambar);
+        $this->db->update('gambar', ['thumbnail' => 'set', 'status_gambar' => 'active']);
+        $this->AdminKelolaProducts->updateStatusUnit($id_unit);
+
+        // Flash message sukses
+        $this->session->set_flashdata('flash', 'Unit baru berhasil ditambahkan!.');
+        $this->session->set_flashdata('flash_type', 'success');
+        redirect('admin/products');
+    }
+
+
+    public function hapus_unit($id_unit){
+        $hapus = $this->AdminKelolaProducts->delete_unit($id_unit);
+
+        if ($hapus) {
+            $this->session->set_flashdata('flash', 'Unit berhasil dihapus!.');
+            $this->session->set_flashdata('flash_type', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Unit gagal dihapus!.');
+            $this->session->set_flashdata('flash_type', 'warning');
+        }
+
+    redirect('admin/products');
+    }
 
 
 
+    // edit unit
+    public function edit_data_unit($id_unit){
+        $data['page'] = 'stocks';
+        $data['merk']  = $this->AdminMerk->getAllMerk();
+        $data['years'] = $this->AdminTahun->getYears();
+        $data['units'] = $this->AdminKelolaProducts->GetUnitById($id_unit);
 
+        // Validasi form input teks
+        $this->form_validation->set_rules('namaUnit', 'name of unit', 'required');
+        $this->form_validation->set_rules('merk', 'merk', 'required');
+        $this->form_validation->set_rules('warna', 'warna', 'required');
+        $this->form_validation->set_rules('tahun', 'tahun', 'required');
+        $this->form_validation->set_rules('harga', 'harga', 'required');
+        $this->form_validation->set_rules('transmisi', 'transmisi', 'required');
+        if ($this->form_validation->run() == FALSE) {
 
-    // private function uploadImages($id_unit){
-    //     $files = $_FILES;
-    //     $thumbnail_index = $this->input->post('thumbnail'); // index dari JS
-    //     $count = count($_FILES['foto']['name']);
-
-    //     for ($i = 0; $i < $count; $i++) {
-    //         if ($files['foto']['name'][$i]) {
-    //             $_FILES['file']['name'] = $files['foto']['name'][$i];
-    //             $_FILES['file']['type'] = $files['foto']['type'][$i];
-    //             $_FILES['file']['tmp_name'] = $files['foto']['tmp_name'][$i];
-    //             $_FILES['file']['error'] = $files['foto']['error'][$i];
-    //             $_FILES['file']['size'] = $files['foto']['size'][$i];
-
-    //             $config['upload_path']   = './storage/units/';
-    //             $config['allowed_types'] = 'jpg|jpeg|png';
-    //             $config['max_size']      = 2048;
-    //             $config['encrypt_name']  = TRUE;
-
-    //             $this->load->library('upload', $config);
-    //             $this->upload->initialize($config);
-
-    //             if ($this->upload->do_upload('file')) {
-    //                 $fileData = $this->upload->data();
-    //                 $thumbnail_status = ($i == $thumbnail_index) ? 1 : 0;
-
-    //                 $data_gambar = [
-    //                     'id_unit' => $id_unit,
-    //                     'nama_gambar' => $fileData['file_name'],
-    //                     'thumbnail' => $thumbnail_status
-    //                 ];
-    //                 $this->db->insert('gambar', $data_gambar);
-    //             }
-    //         }
-    //     }
-    // }
-
-    // private function uploadImages($id_unit){
-    //     $tempDir = './storage/temp/';
-    //     $finalDir = './storage/units/';
-
-    //     if (!is_dir($finalDir)) {
-    //         mkdir($finalDir, 0777, true);
-    //     }
-
-    //     $fotoList = $this->input->post('foto_terupload'); // array dari hidden input
-    //     if (!empty($fotoList)) {
-    //         foreach ($fotoList as $index => $fileName) {
-    //             $source = $tempDir . $fileName;
-    //             $dest   = $finalDir . $fileName;
-    //             if (file_exists($source)) {
-    //                 rename($source, $dest);
-    //                 $this->db->insert('gambar', [
-    //                     'id_unit' => $id_unit,
-    //                     'nama_gambar' => $fileName,
-    //                     'thumbnail' => $index == 0 ? 1 : 0 // default thumbnail pertama
-    //                 ]);
-    //             }
-    //         }
-    //     }
-    // }
+            // Reload form beserta value yang udah diketik user
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/stock-mobil/edit-mobil/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+            $this->AdminKelolaProducts->updateUnit($id_unit);
+            $this->session->set_flashdata('flash', 'Data unit berhasil diperbarui!.');
+            $this->session->set_flashdata('flash_type', 'success');
+            redirect('admin/products');
+        }
+    }
 
 
 
-    // public function upload_foto_produk(){
-    //     $config['upload_path']   = './storage/temp/'; // simpan sementara dulu
-    //     $config['allowed_types'] = 'jpg|jpeg|png';
-    //     $config['max_size']      = 2048;
-    //     $config['encrypt_name']  = TRUE;
+    public function edit_images($id_unit){
+        $data['page'] = 'stocks';
 
-    //     if (!is_dir($config['upload_path'])) {
-    //         mkdir($config['upload_path'], 0777, true);
-    //     }
+        $data['units']  = $this->AdminKelolaProducts->GetNameUnit($id_unit);
+        $data['images'] = $this->AdminGambar->getGambarByUnit($id_unit);
+        $data['thumbnail'] = $this->AdminGambar->getThumbnailByUnit($id_unit);
 
-    //     $this->load->library('upload', $config);
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/stock-mobil/edit-mobil/edit_images', $data);
+        $this->load->view('templates/admin/admin_footer');
+    }
 
-    //     if ($this->upload->do_upload('file')) {
-    //         $data = $this->upload->data();
-    //         echo json_encode(['status' => 'success', 'file' => $data['file_name']]);
-    //     } else {
-    //         echo json_encode(['status' => 'error', 'msg' => $this->upload->display_errors()]);
-    //     }
-    // }
 
+
+    public function updateImage() 
+{
+    $id_unit = $this->input->post('id_unit');
+    $files   = $_FILES;
+    $count   = count($_FILES['files']['name']);
+    $upload_path = './storage/units/';
+
+    if (!is_dir($upload_path)) {
+        mkdir($upload_path, 0777, TRUE);
+    }
+
+    $config['upload_path']   = $upload_path;
+    $config['allowed_types'] = 'jpg|jpeg|png';
+    $config['max_size']      = 2048;
+
+    $allowed_extensions = ['jpg','jpeg','png'];
+    $this->load->library('upload');
+
+    $errors   = [];
+    $uploaded = 0;
+    $hasFile  = false;
+
+    // ✅ Cek apakah user memilih file
+    for ($i = 0; $i < $count; $i++) {
+        if (!empty($files['files']['name'][$i])) {
+            $hasFile = true;
+            break;
+        }
+    }
+
+    if (!$hasFile) {
+        $this->session->set_flashdata('error', 
+            '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Terjadi Kesalahan, silahkan pilih file gambar.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+        redirect('admin/edit_images/'.$id_unit);
+        return;
+    }
+
+    // 🧹 1. Hapus gambar lama dari folder & database
+    $oldImages = $this->db->get_where('gambar', ['id_unit' => $id_unit])->result();
+    if (!empty($oldImages)) {
+        foreach ($oldImages as $img) {
+            $filePath = $upload_path . $img->nama_gambar;
+            if (file_exists($filePath)) {
+                unlink($filePath); // hapus file fisik
+            }
+        }
+        // hapus dari database
+        $this->db->where('id_unit', $id_unit);
+        $this->db->delete('gambar');
+    }
+
+    // 📸 2. Upload gambar baru
+    for ($i = 0; $i < $count; $i++) {
+        if (!empty($files['files']['name'][$i])) {
+            $originalName = $files['files']['name'][$i];
+            $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+            // Validasi ekstensi manual
+            if (!in_array($ext, $allowed_extensions)) {
+                $errors[] = "$originalName : ekstensi file tidak diizinkan.";
+                continue;
+            }
+
+            $_FILES['file']['name']     = $files['files']['name'][$i];
+            $_FILES['file']['type']     = $files['files']['type'][$i];
+            $_FILES['file']['tmp_name'] = $files['files']['tmp_name'][$i];
+            $_FILES['file']['error']    = $files['files']['error'][$i];
+            $_FILES['file']['size']     = $files['files']['size'][$i];
+
+            $newName = uniqid('img_').'.'.$ext;
+            $config['file_name'] = $newName;
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('file')) {
+                // ✅ Simpan ke database
+                $this->db->insert('gambar', [
+                    'id_unit' => $id_unit,
+                    'nama_gambar' => $newName,
+                    'thumbnail' => 'not_set'
+                ]);
+                $uploaded++;
+            } else {
+                $errors[] = $this->upload->display_errors('', '');
+            }
+        }
+    }
+
+    // 📢 3. Flash message
+    if ($uploaded > 0) {
+        $this->session->set_flashdata('flash', 
+            '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                Gambar berhasil diperbarui!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+    }
+
+    if (!empty($errors)) {
+        $this->session->set_flashdata('error', 
+            '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+            . implode('<br>', $errors) .
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+    }
+
+    redirect('admin/updateThumbnail/'.$id_unit);
+    }
+
+
+    public function updateThumbnail($id_unit){
+        $data['page'] = 'stocks';
+
+        $data['units']  = $this->AdminKelolaProducts->GetNameUnit($id_unit);
+        $data['images'] = $this->AdminGambar->getGambarByUnit($id_unit);
+
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/stock-mobil/edit-mobil/update_thumbnail', $data);
+        $this->load->view('templates/admin/admin_footer');
+
+    }
+
+
+    public function detailUnit($id_unit){
+        $data['page'] = 'stocks';
+
+        $data['units']  = $this->AdminKelolaProducts->getUnitByIdJoinMerk($id_unit);
+        $data['gambar'] = $this->AdminGambar->getGambarByUnit($id_unit);
+        $data['thumbnail'] = $this->AdminGambar->getThumbnailByUnit($id_unit);
+
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/stock-mobil/detail-unit/index', $data);
+        $this->load->view('templates/admin/admin_footer');
+
+    }
+
+
+
+    // Menu Merk Unit
+    public function merk(){
+        $data['page'] = 'merk';
+        $data['merks'] = $this->AdminKelolaMerk->getAllMerk();
+
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/master-merk/index', $data);
+        $this->load->view('templates/admin/admin_footer');
+    }
+
+
+    public function tambah_merk(){
+        $data['page'] = 'merk';
+
+        // Validasi form input teks
+        $this->form_validation->set_rules('namaMerk', 'name of merk', 'required|is_unique[mstr_merk.nama_merk]', [
+            'is_unique' => 'Merk ini sudah ada. Silahkan masukkan merk lain.'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+
+            // Reload form beserta value yang udah diketik user
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/master-merk/tambah-merk/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+            $this->AdminKelolaMerk->insertMerk();
+            $this->session->set_flashdata('flash', 'Merk ditambahkan!');
+            redirect('admin/merk');
+        }
+    }
+
+
+    public function edit_merk($id_merk){
+        $data['page'] = 'merk';
+        $data['merk'] = $this->AdminKelolaMerk->getMerkById($id_merk);
+
+        // Validasi form input teks
+        $this->form_validation->set_rules('namaMerk', 'name of merk', 'required|is_unique[mstr_merk.nama_merk]', [
+            'is_unique' => 'Merk ini sudah ada. Silahkan masukkan merk lain.'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+
+            // Reload form beserta value yang udah diketik user
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/master-merk/edit-merk/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+            $this->AdminKelolaMerk->updateMerk($id_merk);
+            $this->session->set_flashdata('flash', 'Merk berhasil diperbarui!.');
+            $this->session->set_flashdata('flash_type', 'success');
+            redirect('admin/merk');
+        }
+    }
+
+
+    public function hapus_merk($id_merk){
+        $hapus = $this->AdminKelolaMerk->delete_merk($id_merk);
+
+        if ($hapus) {
+            $this->session->set_flashdata('flash', 'Merk berhasil dihapus!.');
+            $this->session->set_flashdata('flash_type', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Merk ini tidak bisa dihapus karena masih dipakai unit.');
+            $this->session->set_flashdata('flash_type', 'warning');
+        }
+    redirect('admin/merk');
+    }
 
 }

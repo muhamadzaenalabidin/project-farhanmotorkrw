@@ -1,5 +1,11 @@
 <main id="main" class="main">
 
+<div class="flash-data" 
+     data-flash="<?= $this->session->flashdata('flash'); ?>"
+     data-type="<?= $this->session->flashdata('flash_type'); ?>">
+</div>
+
+
 <div class="pagetitle">
 	<h1>Dashboard</h1>
 	<nav class="mt-2">
@@ -25,10 +31,11 @@
 					<div class="col-12 col-md-10 col-lg-10 d-flex align-items-center">
 						<h5 class="card-title mb-0">Stock Mobil</h5>
 					</div>
-					<form id="form-upload" enctype="multipart/form-data" method="post">
-						<input type="hidden" name="id_unit" value="33"><!-- contoh id unit -->
-						<input id="file-1" name="images[]" type="file" multiple>
-					</form>
+					<div class="col-12 col-md-10 col-lg-10 d-flex align-items-center">
+						<a href="<?= base_url('admin/tambah_product')?>" class="btn btn-primary btn-sm mb-5">
+							<i class="fa-solid fa-plus fa-sm"></i> Unit
+						</a>
+					</div>
 				</div>
 
 
@@ -41,333 +48,64 @@
 					<th scope="col">Transmisi</th>
 					<th scope="col">Tahun</th>
 					<th scope="col">Harga</th>
+					<th scope="col">Status</th>
 					<th scope="col">Aksi</th>
 					</tr>
 				</thead>
 				<tbody>
+					<?php foreach($products as $unit): ?>
 					<tr>
-					<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-					<td><a href="#" class="text-primary fw-bold">New Kijang Innova</a></td>
-					<td class="fw-bold text-muted">Toyota</td>
-					<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-					<td>2025</td>
-					<td class="text-success fw-bold">Rp. 500.000.000</td>
+					<th scope="row"><img src="storage/units/<?= $unit->thumbnail ?>" alt=""></th>
 					<td>
-						<div class="btn-group">
-							<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-							<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-						</div>
+						<a href="<?= base_url('admin/detailUnit/') . $unit->id_unit; ?>" class="text-primary fw-bold"><?= $unit->nama_unit ?></a>
+					</td>
+					<td class="fw-bold text-muted">
+						<?= $unit->nama_merk ?>
+					</td>
+					<td class="fw-bold text-muted">
+						<i class="fa-solid fa-gear"></i>
+						<?= $unit->transmisi ?>
+					</td>
+					<td>
+						<?= $unit->tahun ?>
+					</td>
+					<td class="text-success fw-bold">
+						Rp <?= number_format($unit->harga, 0, ',', '.'); ?>	
+					</td>
+					<td>
+						<span class="badge text-sm <?= ($unit->status == 'published') ? 'bg-success' : 'bg-danger' ?>">
+							<?= $unit->status ?>
+						</span>
+					</td>
+					<td>
+						<!-- Dropdown Action Button -->
+					<div class="dropdown">
+						<button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-pencil-square"></i>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+							<a class="dropdown-item tombol-edit" href="<?= base_url('admin/edit_data_unit/') . $unit->id_unit; ?>">
+								<i class="bi bi-pencil"></i>Data Unit
+							</a>
+							</li>
+							<li>
+							<a class="dropdown-item tombol-edit" href="<?= base_url('admin/edit_images/') . $unit->id_unit; ?>">
+								<i class="bi bi-gear"></i>Gambar Unit
+							</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+							<a class="dropdown-item text-danger tombol-hapus" href="<?= base_url('admin/hapus_unit/') . $unit->id_unit; ?>">
+								<i class="bi bi-trash"></i> Hapus
+							</a>
+							</li>
+						</ul>
+					</div>
+
 					</td>
 					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Civic Turbo</a></td>
-						<td class="fw-bold text-muted">Honda</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2024</td>
-						<td class="text-success fw-bold">Rp. 450.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Pajero Sport</a></td>
-						<td class="fw-bold text-muted">Mitsubishi</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2023</td>
-						<td class="text-success fw-bold">Rp. 600.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Alphard G</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2025</td>
-						<td class="text-success fw-bold">Rp. 1.200.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Brio Satya</a></td>
-						<td class="fw-bold text-muted">Honda</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Manual</td>
-						<td>2022</td>
-						<td class="text-success fw-bold">Rp. 180.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Fortuner VRZ</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2024</td>
-						<td class="text-success fw-bold">Rp. 650.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Xpander Cross</a></td>
-						<td class="fw-bold text-muted">Mitsubishi</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2023</td>
-						<td class="text-success fw-bold">Rp. 350.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Civic RS</a></td>
-						<td class="fw-bold text-muted">Honda</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Manual</td>
-						<td>2021</td>
-						<td class="text-success fw-bold">Rp. 420.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Avanza 1.5 G</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2022</td>
-						<td class="text-success fw-bold">Rp. 240.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Rush TRD</a></td>
-						<td class="fw-bold text-muted">Daihatsu</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2023</td>
-						<td class="text-success fw-bold">Rp. 300.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Jazz RS</a></td>
-						<td class="fw-bold text-muted">Honda</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Manual</td>
-						<td>2021</td>
-						<td class="text-success fw-bold">Rp. 280.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">HR-V</a></td>
-						<td class="fw-bold text-muted">Honda</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2022</td>
-						<td class="text-success fw-bold">Rp. 360.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Fortuner Legender</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2025</td>
-						<td class="text-success fw-bold">Rp. 750.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Terios X</a></td>
-						<td class="fw-bold text-muted">Daihatsu</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Manual</td>
-						<td>2021</td>
-						<td class="text-success fw-bold">Rp. 210.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Camry V</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2024</td>
-						<td class="text-success fw-bold">Rp. 700.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Avanza Veloz</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2023</td>
-						<td class="text-success fw-bold">Rp. 270.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">X-Trail</a></td>
-						<td class="fw-bold text-muted">Nissan</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2024</td>
-						<td class="text-success fw-bold">Rp. 480.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Navara</a></td>
-						<td class="fw-bold text-muted">Nissan</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Manual</td>
-						<td>2022</td>
-						<td class="text-success fw-bold">Rp. 360.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Terra VL</a></td>
-						<td class="fw-bold text-muted">Nissan</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2025</td>
-						<td class="text-success fw-bold">Rp. 550.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Xpander Ultimate</a></td>
-						<td class="fw-bold text-muted">Mitsubishi</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2025</td>
-						<td class="text-success fw-bold">Rp. 380.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Fortuner VRZ 4x4</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2025</td>
-						<td class="text-success fw-bold">Rp. 800.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Brio RS</a></td>
-						<td class="fw-bold text-muted">Honda</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Manual</td>
-						<td>2023</td>
-						<td class="text-success fw-bold">Rp. 200.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><img src="assets/images/cars/product-1.jpeg" alt=""></th>
-						<td><a href="#" class="text-primary fw-bold">Avanza E</a></td>
-						<td class="fw-bold text-muted">Toyota</td>
-						<td class="fw-bold text-muted"><i class="fa-solid fa-gear"></i> Automatic</td>
-						<td>2023</td>
-						<td class="text-success fw-bold">Rp. 260.000.000</td>
-						<td>
-							<div class="btn-group">
-								<a href="#" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-								<a href="#" class="btn btn-sm btn-danger tombol-hapus"><i class="fa-solid fa-trash"></i></a>
-							</div>
-						</td>
-					</tr>
-
+					<?php endforeach; ?>
 				</tbody>
 				</table>
 

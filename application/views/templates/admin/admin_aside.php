@@ -14,28 +14,28 @@
       <li class="nav-heading text-muted">Data Webisite</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed bg-fm-sub" href="#">
+        <a class="nav-link collapsed bg-fm-sub <?= $page == 'profile' ? 'bg-fm-aktif' : '' ?>" href="<?= base_url('admin/profile') ?>">
           <i class="bi bi-files-alt"></i>
           <span>Profile Showroom</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed bg-fm-sub" href="#">
+        <a class="nav-link collapsed bg-fm-sub <?= $page == 'slider' ? 'bg-fm-aktif' : '' ?>" href="<?= base_url('admin/slider') ?>">
           <i class="bi bi-card-image"></i>
-          <span>Banner</span>
+          <span>Banner / Slider</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed bg-fm-sub" href="#">
+        <a class="nav-link collapsed bg-fm-sub <?= $page == 'contacts' ? 'bg-fm-aktif' : '' ?>" href="<?= base_url('admin/contacts') ?>">
           <i class="bi bi-whatsapp"></i>
-          <span>Kontak Marketing</span>
+          <span>Kontak Showroom</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed bg-fm-sub" href="#">
+        <a class="nav-link collapsed bg-fm-sub <?= $page == 'sosialmedia' ? 'bg-fm-aktif' : '' ?>" href="<?= base_url('admin/sosmed')?>">
           <i class="bi bi-person-badge"></i>
           <span>Sosial Media</span>
         </a>

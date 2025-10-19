@@ -188,3 +188,15 @@ img.logo-footer {
   box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
   transform: translateZ(0) !important;
 }
+
+
+
+/* deskripsi produk */
+
+.deskripsi-produk p,
+.deskripsi-produk ol li,
+.deskripsi-produk ul li {
+  font-size: 12px !important;
+  margin-top: 0 !important;
+  margin-bottom: 3px !important;
+}

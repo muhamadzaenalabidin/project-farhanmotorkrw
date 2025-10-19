@@ -13,11 +13,22 @@
           WEBSITE RESMI
         </span>
         <span class="h6 d-block mt-4">
-          <strong>FARHAN MOTOR KARAWANG</strong> <br> <span class="fw-light mt-3">Jual-Beli Mobil Bekas Berkualitas</span>
+          <strong>
+            <?= strtoupper($profiles['nama_showroom'])?>
+          </strong> <br> <span class="fw-light mt-3">Jual-Beli Mobil Bekas Berkualitas</span>
         </span>
         <div class="footer-address mt-3">
-          <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>Jl. Rangga gede no.18, gempol-tanjungpura, Karawang 41374</p>
-          <p class="mb-2"><i class="bi bi-telephone me-2"></i>0878 82521019 / 0815 7777800</p>
+          <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>
+            <?= $profiles['alamat'] ?>
+          </p>
+          <p class="mb-2"><i class="bi bi-telephone me-2"></i>
+          <?php 
+          $lastIndex = count($numberactive) - 1;
+          foreach($numberactive as $index => $number) : ?>
+            +62<?= $number['nomor_kontak'] ?><?= $index < $lastIndex ? ' / ' : '' ?>
+          <?php endforeach; ?>
+
+          </p>
           <p class="mb-2"><i class="bi bi-instagram me-2"></i>@farhanmotor.id</p>
           <p class="mb-2"><i class="bi bi-clock me-2"></i>Kamis - Sabtu: 09.00 - 17.00</p>
         </div>
@@ -50,9 +61,11 @@
 
 <!-- whatapps -->
 
-<a href="https://wa.me/6281234567890" target="_blank" id="wa-float">
+<?php if($whapsapp) : ?>
+<a href="https://wa.me/62<?= $whapsapp->nomor_kontak ?>" target="_blank" id="wa-float">
   <i class="bi bi-whatsapp"></i>
 </a>
+<?php endif; ?>
 
 
 <!-- whatapp -->

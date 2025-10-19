@@ -16,12 +16,18 @@ class Admin extends CI_Controller {
 
     public function index()
     {   
+        $this->load->model('AdminDashboard');
         $data['page'] = 'dashboard';
+
+        $data['totalunits'] = $this->AdminDashboard->getCountAllUnits();
+        $data['totalmerk'] = $this->AdminDashboard->getCountAllMerk();
+        $data['totalsliders'] = $this->AdminDashboard->getCountAllSlider();
+
 
         $this->load->view('templates/admin/admin_top');
         $this->load->view('templates/admin/admin_header');
         $this->load->view('templates/admin/admin_aside', $data);
-        $this->load->view('admin/index');
+        $this->load->view('admin/index', $data);
         $this->load->view('templates/admin/admin_footer');
     }
 
@@ -517,4 +523,446 @@ class Admin extends CI_Controller {
     redirect('admin/merk');
     }
 
+
+
+    // kelola slider
+    public function slider(){
+
+    $this->load->model('AdminKelolaSlider');
+
+    $data['page'] = 'slider';
+    $data['sliders'] = $this->AdminKelolaSlider->getAllSliders();
+
+    $this->load->view('templates/admin/admin_top');
+    $this->load->view('templates/admin/admin_header');
+    $this->load->view('templates/admin/admin_aside', $data);
+    $this->load->view('admin/slider/index', $data);
+    $this->load->view('templates/admin/admin_footer');
+
+    
+    }
+
+    public function tambah_slider(){
+        $this->load->model('AdminKelolaSlider');
+
+        $data['page'] = 'slider';
+
+        // === VALIDASI FORM ===
+        $this->form_validation->set_rules('judulslider', 'Judul Slider', 'required|trim');
+        $this->form_validation->set_rules('deskripsislider', 'Deskripsi Slider/Banner', 'trim|max_length[255]');
+
+        if ($this->form_validation->run() == FALSE) {
+            // TAMPILKAN VIEW JIKA VALIDASI GAGAL
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/slider/tambah-slider/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+            return; // stop di sini biar gak lanjut ke upload
+        }
+
+        // === PROSES UPLOAD GAMBAR ===
+        if (!empty($_FILES['gambar_slider']['name'])) {
+
+            $uploadPath = FCPATH . 'storage/sliders/';
+
+            // Pastikan folder ada
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, TRUE);
+            }
+
+            $config['upload_path']   = $uploadPath;
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size']      = 2048; // 2MB
+            $config['encrypt_name']  = TRUE;
+
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('gambar_slider')) {
+                $uploadData = $this->upload->data();
+
+                $insertData = [
+                    'judul'     => $this->input->post('judulslider', TRUE),
+                    'deskripsi' => $this->input->post('deskripsislider', TRUE),
+                    'image'     => $uploadData['file_name'],
+                    'create_at' => date('Y-m-d H:i:s')
+                ];
+
+                $this->AdminKelolaSlider->insertSlider($insertData);
+                $this->session->set_flashdata('flash', 'Slider / Banner berhasil ditambahkan!');
+                $this->session->set_flashdata('flash_type', 'success');
+                redirect('admin/slider');
+                return; // 🛑 stop di sini biar gak render ulang view
+            } else {
+                // TAMPILKAN ERROR UPLOAD
+                $data['error'] = $this->upload->display_errors('<small class="text-danger">', '</small>');
+            }
+
+        } else {
+            // Jika gambar kosong
+            $data['error'] = '<small class="text-danger">Gambar slider wajib diunggah.</small>';
+        }
+
+        // Kalau upload gagal / gambar kosong → render ulang view
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/slider/tambah-slider/index', $data);
+        $this->load->view('templates/admin/admin_footer');
+    }
+
+
+    public function edit_slider($id){
+    
+    $data['page'] = 'slider';
+
+    $this->form_validation->set_rules('judulslider', 'Judul Slider', 'required|trim');
+    $this->form_validation->set_rules('deskripsislider', 'Deskripsi Slider', 'trim');
+
+    $slider = $this->db->get_where('sliders', ['id_slider' => $id])->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $data['slider'] = $slider;
+
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/slider/edit-slider/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+            $judul = $this->input->post('judulslider');
+            $deskripsi = $this->input->post('deskripsislider');
+
+            // Cek apakah user upload gambar baru atau tidak
+            if (!empty($_FILES['gambar_slider']['name'])) {
+                $config['upload_path']   = './storage/sliders/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['max_size']      = 2048;
+                $config['encrypt_name']  = true;
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('gambar_slider')) {
+                    $gambarBaru = $this->upload->data('file_name');
+
+                    // Hapus gambar lama kalau ada
+                    if (!empty($slider['image']) && file_exists('./storage/sliders/' . $slider['image'])) {
+                        unlink('./storage/sliders/' . $slider['image']);
+                    }
+
+                    $this->db->set('image', $gambarBaru);
+                } else {
+                    // Kalau upload gagal
+                    $data['slider'] = $slider;
+                    $data['error']  = $this->upload->display_errors();
+                    $this->load->view('templates/admin/admin_top');
+                    $this->load->view('templates/admin/admin_header');
+                    $this->load->view('templates/admin/admin_aside', $data);
+                    $this->load->view('admin/slider/edit-slider/index', $data);
+                    $this->load->view('templates/admin/admin_footer');
+                    return;
+                }
+            }
+
+            // Update judul & deskripsi
+            $this->db->set('judul', $judul);
+            $this->db->set('deskripsi', $deskripsi);
+            $this->db->where('id_slider', $id);
+            $this->db->update('sliders');
+
+            $this->session->set_flashdata('flash', 'Slider berhasil diperbarui!');
+            $this->session->set_flashdata('flash_type', 'success');
+            redirect('admin/slider');
+        }
+    }
+
+
+    public function hapus_slider($id)
+    {
+        $this->load->model('AdminKelolaSlider');
+        $slider = $this->AdminKelolaSlider->getSliderById($id);
+
+        if ($slider) {
+            // Hapus gambar dari folder
+            if (!empty($slider['image']) && file_exists('./storage/sliders/' . $slider['image'])) {
+                unlink('./storage/sliders/' . $slider['image']);
+            }
+
+            // Hapus data slider dari database
+            $this->AdminKelolaSlider->deleteSlider($id);
+
+            $this->session->set_flashdata('flash', 'Slider berhasil dihapus!');
+            $this->session->set_flashdata('flash_type', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Slider tidak ditemukan!');
+            $this->session->set_flashdata('flash_type', 'warning');
+        }
+
+        redirect('admin/slider');
+    }
+
+
+
+
+    // profile
+    public function profile(){
+        $this->load->model('AdminProfile');
+
+        $data['page'] = 'profile';
+
+        $data['profiles'] = $this->AdminProfile->getProfiles();
+
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/profile/index', $data);
+        $this->load->view('templates/admin/admin_footer');
+    }
+
+    public function update_profile(){
+        $this->load->model('AdminProfile');
+        // Ambil data dari form
+        $nama_showroom = $this->input->post('nama_showroom', true);
+        $alamat        = $this->input->post('alamat', true);
+
+        // Siapkan data awal untuk update
+        $updateData = [
+            'nama_showroom' => $nama_showroom,
+            'alamat'        => $alamat
+        ];
+
+        // === LOGO UPLOAD HANDLING ===
+        if (!empty($_FILES['logo_showroom']['name'])) {
+            $config['upload_path']   = './assets/images/logos/';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size']      = 2048;
+            $config['file_name']     = 'logo_' . time();
+
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('logo_showroom')) {
+                $uploadData = $this->upload->data();
+
+                // Hapus logo lama
+                $oldLogo = $this->AdminProfile->getProfiles()['logo'];
+                if ($oldLogo && file_exists('./assets/images/logos/' . $oldLogo)) {
+                    unlink('./assets/images/logos/' . $oldLogo);
+                }
+
+                $updateData['logo'] = $uploadData['file_name'];
+            } else {
+                $this->session->set_flashdata('error', $this->upload->display_errors());
+                redirect('admin/profile');
+            }
+        }
+
+        // === UPDATE DATA PROFILE ===
+        $this->db->where('id_profile', 1);
+        $this->db->update('profiles', $updateData);
+
+        $this->session->set_flashdata('success', 'Profile berhasil diperbarui ✅');
+        redirect('admin/profile');
+    }
+
+
+    public function contacts(){
+        $this->load->model('AdminContacts');
+
+        $data['page'] = 'contacts';
+
+        $data['contacts'] = $this->AdminContacts->getAllContacts();
+        $data['whatsapp'] = $this->AdminContacts->getWhatsapp();
+
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/contacts/index', $data);
+        $this->load->view('templates/admin/admin_footer');
+    }
+
+
+    public function tambah_contact(){
+        $this->load->model('AdminContacts');
+
+        $data['page'] = 'contacts';
+
+        // Validasi form input teks
+        $this->form_validation->set_rules('labelKontak', 'label of contact', 'required');
+        $this->form_validation->set_rules('nomorKontak', 'number of contact', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+
+            // Reload form beserta value yang udah diketik user
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/contacts/tambah-kontak/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+
+            $status = $this->input->post('tampilLanding', TRUE) ? 'on' : 'off';
+
+            $data = [
+                'nama_kontak' => $this->input->post('labelKontak', TRUE),
+                'nomor_kontak' => $this->input->post('nomorKontak', TRUE),
+                'status' => $status,
+                'wa_floating' => 'not_set',
+                'create_at'   => date('Y-m-d H:i:s')
+            ];
+
+            $this->AdminContacts->insertContact($data);
+            $this->session->set_flashdata('flash', 'Kontak berhasil ditambahkan!.');
+            $this->session->set_flashdata('flash_type', 'success');
+            redirect('admin/contacts');
+        }
+    }
+
+    public function ubah_contact($id_kontak){
+        $this->load->model('AdminContacts');
+
+        $data['page'] = 'contacts';
+        $data['contact'] = $this->AdminContacts->getContactById($id_kontak);
+
+        // Validasi form input teks
+        $this->form_validation->set_rules('labelKontak', 'label of contact', 'required');
+        $this->form_validation->set_rules('nomorKontak', 'number of contact', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+
+            // Reload form beserta value yang udah diketik user
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/contacts/edit-kontak/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+
+
+            $id_kontak = $this->input->post('id_kontak', TRUE);
+            $status = $this->input->post('tampilLanding', TRUE) ? 'on' : 'off';
+
+            $data = [
+                'nama_kontak' => $this->input->post('labelKontak', TRUE),
+                'nomor_kontak' => $this->input->post('nomorKontak', TRUE),
+                'status' => $status,
+            ];
+
+            $this->AdminContacts->updateContact($id_kontak, $data);
+            $this->session->set_flashdata('flash', 'Kontak berhasil diperbarui!.');
+            $this->session->set_flashdata('flash_type', 'success');
+            redirect('admin/contacts');
+        }
+    }
+
+
+    public function hapus_contact($id_kontak){
+        $this->load->model('AdminContacts');
+
+        $hapus = $this->AdminContacts->deleteContact($id_kontak);
+
+        if ($hapus) {
+            $this->session->set_flashdata('flash', 'Kontak berhasil dihapus!.');
+            $this->session->set_flashdata('flash_type', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Kontak gagal dihapus!.');
+            $this->session->set_flashdata('flash_type', 'warning');
+        }
+    redirect('admin/contacts');
+    }
+
+    public function whatsapp(){
+        $data['page'] = 'contacts';
+
+        $this->load->model('AdminContacts');
+        $data['daftarkontak'] = $this->AdminContacts->getAllContacts();
+
+        
+        $this->form_validation->set_rules('whatsapp', 'number', 'required');
+
+        if($this->form_validation->run() == FALSE){
+
+        $this->load->view('templates/admin/admin_top');
+        $this->load->view('templates/admin/admin_header');
+        $this->load->view('templates/admin/admin_aside', $data);
+        $this->load->view('admin/contacts/whatsapp/index', $data);
+        $this->load->view('templates/admin/admin_footer');
+        } else {
+            $id_kontak =  $this->input->post('whatsapp', TRUE);
+            if ($this->AdminContacts->setToWhatsapp($id_kontak)) {
+                $this->session->set_flashdata('flash', 'Kontak berhasil dijadikan tombol WhatsApp floating!');
+                $this->session->set_flashdata('flash_type', 'success');
+            } else {
+                $this->session->set_flashdata('flash', 'Gagal mengubah status kontak!');
+                $this->session->set_flashdata('flash_type', 'error');
+            }
+
+            redirect('admin/contacts');
+        }
+        
+    }
+
+
+    public function sosmed(){
+        $this->load->model('AdminMedsos');
+
+        $data['page'] = 'sosialmedia';
+        $data['platform'] = $this->AdminMedsos->GetAllPlatform();
+        $data['medsos'] = $this->AdminMedsos->getAllMedsos();
+
+        $this->form_validation->set_rules(
+            'platform',
+            'Platform',
+            'required|trim',
+            array(
+                'required' => 'Platform harus dipilih dahulu!'
+            )
+        );
+
+        $this->form_validation->set_rules(
+            'username',
+            'Username',
+            'required|trim',
+            array(
+                'required' => 'Silahkan isi kolom username!'
+            )
+        );
+
+        $this->form_validation->set_rules(
+            'url',
+            'URL',
+            'required|trim',
+            array(
+                'required' => 'Silahkan isi kolom URL!'
+            )
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+            // simpan error ke flashdata
+            $this->session->set_flashdata('flash', validation_errors('<div>- ', '</div>'));
+            $this->session->set_flashdata('flash_type', 'warning');
+
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/media-sosial/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+            $username = '@' . ltrim($this->input->post('username', TRUE), '@'); // auto @
+            $dataInsert = [
+                'id_platform' => $this->input->post('platform', TRUE),
+                'username'    => $username,
+                'url'         => $this->input->post('url', TRUE),
+                'create_at'   => date('Y-m-d H:i:s')
+            ];
+
+            
+            $this->AdminMedsos->insertMedsos($dataInsert);
+
+            $this->session->set_flashdata('flash', 'Sosmed berhasil ditambahkan!.');
+            $this->session->set_flashdata('flash_type', 'success');
+            redirect('admin/sosmed');
+        }
+    }
+
 }
+

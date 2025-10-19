@@ -133,7 +133,7 @@
 
 					<div class="text-star mt-3">
 						<button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-						<a href="<?= base_url('admin/products') ?>" class="btn btn-warning btn-sm">Kembali</a>
+						<a href="<?= base_url('admin/products') ?>" class="btn btn-secondary btn-sm">Kembali</a>
 					
 					</div>
 				</form><!-- End Multi Columns Form -->

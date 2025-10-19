@@ -12,10 +12,9 @@
           <li class="dropdown"><a href="#" class="<?= ($active_menu == 'stok' ? 'on-page' : '') ?>"><span>Stok Mobil</span> 
             <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="<?= base_url('landing/stocks'); ?>">Toyota</a></li>
-              <li><a href="<?= base_url('landing/stocks'); ?>">Honda</a></li>
-              <li><a href="<?= base_url('landing/stocks'); ?>">Suzuki</a></li>
-              <li><a href="<?= base_url('landing/stocks'); ?>">Hyundai</a></li>
+              <?php foreach($merks as $merk): ?>
+                <li><a href="<?= base_url('landing/stocks/' . $merk['id_merk']); ?>"><?= $merk['nama_merk']; ?></a></li>
+              <?php endforeach; ?>
             </ul>
           </li>
           <li><a href="<?= base_url('landing/terms');?>" class="<?= ($active_menu == 'terms' ? 'on-page' : '') ?>">Syarat Ketentuan</a></li>

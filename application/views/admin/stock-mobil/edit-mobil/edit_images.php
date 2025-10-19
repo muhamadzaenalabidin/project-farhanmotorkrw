@@ -68,6 +68,7 @@
               </div>
 
               <button type="submit" class="btn btn-sm btn-primary mt-2">Perbarui</button>
+              <a href="<?= base_url('admin/products')?>" class="btn btn-sm btn-secondary mt-2">Kembali</a>
             </form>
 
           </div>

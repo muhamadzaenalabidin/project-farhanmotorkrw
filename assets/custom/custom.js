@@ -78,6 +78,26 @@ $('.tombol-konfirm').on('click', function(e) {
 
 });
 
+$('.tombol-form-konfirm').on('click', function(e) {
+    e.preventDefault(); // stop submit form langsung
+
+    Swal.fire({
+        width: 400,
+        title: "Simpan Data",
+        text: "Apakah anda yakin?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Simpan!",
+        cancelButtonText: "Batal"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $('#formProfile').submit(); // submit form manual
+        }
+    });
+});
+
 
 // quill
 var quill = new Quill('#editor-container', { theme: 'snow' });
@@ -110,5 +130,31 @@ $(document).ready(function () {
       $thumbs.css('border', 'none');
       $(this).css('border', '3px solid #0d6efd');
     });
+  });
+
+
+
+// hapus 0 di awal nomor kontak
+
+$(document).ready(function(){
+    $('#nomor').on('input', function(){
+        let val = $(this).val();
+        // hapus angka 0 di awal
+        if (val.startsWith('0')) {
+            $(this).val(val.substring(1));
+        }
+    });
+});
+
+
+
+document.getElementById('btn-show-form').addEventListener('click', function() {
+    const form = document.getElementById('form-sosmed');
+    form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+    this.innerHTML = form.style.display === 'none' 
+      ? '<i class="bi bi-plus-lg me-1"></i> Tambah Baru' 
+      : '<i class="bi bi-x-lg me-1"></i> Tutup';
+    this.classList.toggle('btn-danger');
+    this.classList.toggle('btn-primary');
   });
 

@@ -27,7 +27,9 @@
               </div>
               <div class="info-content">
                 <h4>Alamat Kami</h4>
-                <p>Jl. Rangga Gede no. 18, Gempol - Tanjungpura, Karawang Barat</p>
+                <p>
+                  <?= $profiles['alamat']; ?>
+                </p>
               </div>
             </div>
           </div>
@@ -39,8 +41,9 @@
               </div>
               <div class="info-content">
                 <h4>Kontak Kami</h4>
-                <p>0878 82521019</p>
-                <p>0815 7777800</p>
+                <?php foreach($numberactive as $number ) : ?>
+                  <p>+62<?= $number['nomor_kontak']?></p>
+                <?php endforeach; ?>
               </div>
             </div>
           </div>

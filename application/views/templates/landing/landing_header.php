@@ -5,7 +5,7 @@
 
         <!-- Kiri: Logo -->
         <a href="<?= base_url() ?>" class="logo d-flex align-items-center">
-          <img src="<?= base_url('assets/images/logos/')?>fm-logo.jpg" alt="">
+          <img src="<?= base_url('assets/images/logos/' . $profiles['logo'])?>" alt="">
         </a>
 
         <!-- Tengah: Garis -->
@@ -17,8 +17,8 @@
             <div class="row justify-content-star text-sm-start">
               <div class="col">
                 <span class="text-muted text-alamat">
-                  <strong>SHOWROOM | FARHAN MOTOR KARAWANG</strong><br>
-                  Jl. Rangga Gede no. 18, Gempol - Tanjungpura, Karawang Barat
+                  <strong>SHOWROOM | <?= $profiles['nama_showroom']; ?></strong><br>
+                  <?= $profiles['alamat']; ?>
                 </span>
               </div>
             </div>

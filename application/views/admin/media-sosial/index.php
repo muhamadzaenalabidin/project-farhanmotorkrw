@@ -2,16 +2,16 @@
 
   <!-- Flash Message -->
   <div class="flash-data" 
-      data-flash="<?= $this->session->flashdata('flash'); ?>"
-      data-type="<?= $this->session->flashdata('flash_type'); ?>">
+       data-flash="<?= $this->session->flashdata('flash'); ?>"
+       data-type="<?= $this->session->flashdata('flash_type'); ?>">
   </div>
 
   <!-- Page Title -->
   <div class="pagetitle mb-3">
-    <h1 class="fw-semibold mb-1">Sosial Media</h1>
+    <h1 class="fw-semibold mb-1">Dashboard</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Kelola daftar sosial media showroom</li>
+        <li class="breadcrumb-item active">Farhan Motor Karawang</li>
       </ol>
     </nav>
   </div>
@@ -31,10 +31,10 @@
           <div class="card-body">
 
             <!-- ALERT -->
-            <?php if($this->session->flashdata('flash')): ?>
-            <div class="alert alert-<?= $this->session->flashdata('flash_type') ?? 'warning' ?> alert-dismissible fade show mt-3" role="alert">
-                <strong><?= $this->session->flashdata('flash_type') == 'success' ? 'Berhasil!' : 'Perhatian!' ?></strong><br>
-                <?= $this->session->flashdata('flash'); ?>
+            <?php if($this->session->flashdata('flashsoc')): ?>
+            <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                <strong class="py-1"><i class="bi bi-exclamation-triangle-fill text-warning me-2 fs-4"></i>Perhatiaon!</strong><br>
+                <span><?= $this->session->flashdata('flashsoc'); ?></span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php endif; ?>
@@ -106,16 +106,16 @@
                     <td class="text-center">
                     <div class="dropdown">
                         <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="aksiDropdown<?= $i ?>" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-pencil-square"></i>
+                        <i class="bi bi-pencil"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="aksiDropdown<?= $i ?>">
                         <li>
-                            <a class="dropdown-item" href="<?= base_url('admin/sosmed/edit/'.$s['id_sosmed']) ?>">
-                            <i class="bi bi-pencil me-2"></i>Edit
+                            <a class="dropdown-item tombol-edit" href="<?= base_url('admin/edit_sosmed/'.$s['id_sosmed']) ?>">
+                            <i class="bi bi-pencil-square me-2"></i>Edit
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item text-danger tombol-hapus" href="<?= base_url('admin/sosmed/delete/'.$s['id_sosmed']) ?>">
+                            <a class="dropdown-item text-danger tombol-hapus" href="<?= base_url('admin/hapus_sosmed/'.$s['id_sosmed']) ?>">
                             <i class="bi bi-trash me-2"></i>Hapus
                             </a>
                         </li>

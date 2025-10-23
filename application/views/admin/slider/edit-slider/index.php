@@ -1,12 +1,11 @@
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Dashboard</h1>
-        <nav class="mt-2">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">Farhan Motor Karawang</li>
-                <li class="breadcrumb-item active">Edit Slider / Banner</li>
-            </ol>
+    <div class="pagetitle mb-3">
+        <h1 class="fw-semibold mb-1">Dashboard</h1>
+        <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">Farhan Motor Karawang</li>
+        </ol>
         </nav>
     </div><!-- End Page Title -->
 
@@ -86,7 +85,7 @@
                             <!-- Tombol Aksi -->
                             <div class="text-start mt-3">
                                 <button type="submit" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil-square"></i> Update
+                                    <i class="bi bi-pencil-square"></i> Perbarui
                                 </button>
                                 <a href="<?= base_url('admin/slider') ?>" class="btn btn-secondary btn-sm">
                                     <i class="bi bi-arrow-left-circle"></i> Kembali

@@ -150,8 +150,8 @@
 
 
 					<div class="text-star mt-3">
-						<button type="submit" class="btn btn-primary btn-sm">Tambah</button>
-						<a href="<?= base_url('admin/products') ?>" class="btn btn-warning btn-sm">Kembali</a>
+						<button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-save"></i> Tambah</button>
+						<a href="<?= base_url('admin/products') ?>" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left-circle"></i> Kembali</a>
 					
 					</div>
 				</form><!-- End Multi Columns Form -->

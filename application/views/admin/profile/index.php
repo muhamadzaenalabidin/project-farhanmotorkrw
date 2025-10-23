@@ -98,7 +98,7 @@
                     <!-- Tombol Save -->
                     <div class="text-center">
                          <button type="submit" class="btn btn-primary tombol-form-konfirm">
-                            <i class="bi bi-save me-1"></i> Save Changes
+                            <i class="bi bi-save me-1"></i> Simpan Perubahan
                         </button>
                     </div>
 

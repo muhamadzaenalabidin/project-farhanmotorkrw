@@ -49,7 +49,7 @@
                 <input id="file-1" name="files[]" type="file" multiple>
               </div>
 
-              <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
+              <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="fa-solid fa-upload"></i> Upload</button>
             </form>
 
           </div>

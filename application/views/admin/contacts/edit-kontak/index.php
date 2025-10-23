@@ -60,7 +60,7 @@
 					<!-- Tombol -->
 					<div class="text-start mt-5">
                         <button type="submit" class="btn btn-warning btn-sm">
-                            <i class="bi bi-pencil"></i> Perbarui
+                            <i class="bi bi-pencil-square"></i> Perbarui
                         </button>
                         <a href="<?= base_url('admin/contacts') ?>" class="btn btn-secondary btn-sm">
                             <i class="bi bi-arrow-left-circle"></i> Kembali

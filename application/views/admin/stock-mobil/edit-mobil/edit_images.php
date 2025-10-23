@@ -67,8 +67,8 @@
                 <small class="text-muted">* Bisa pilih lebih dari satu file (jpg, jpeg, png)</small>
               </div>
 
-              <button type="submit" class="btn btn-sm btn-primary mt-2">Perbarui</button>
-              <a href="<?= base_url('admin/products')?>" class="btn btn-sm btn-secondary mt-2">Kembali</a>
+              <button type="submit" class="btn btn-sm btn-warning mt-2"><i class="bi bi-pencil-square"></i> Perbarui</button>
+              <a href="<?= base_url('admin/products')?>" class="btn btn-sm btn-secondary mt-2"><i class="bi bi-arrow-left-circle"></i>Kembali</a>
             </form>
 
           </div>

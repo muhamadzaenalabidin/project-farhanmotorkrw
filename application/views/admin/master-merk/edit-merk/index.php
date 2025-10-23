@@ -31,8 +31,14 @@
 
 
 					<div class="text-star mt-4">
-						<button type="submit" class="btn btn-primary btn-sm">Perbarui</button>
-						<a href="<?= base_url('admin/merk') ?>" class="btn btn-warning btn-sm">Kembali</a>
+						<button type="submit" class="btn btn-warning btn-sm">
+							<i class="bi bi-pencil-square"></i>
+							Perbarui
+						</button>
+						<a href="<?= base_url('admin/merk') ?>" class="btn btn-secondary btn-sm">
+							<i class="bi bi-arrow-left-circle"></i>
+							Kembali
+						</a>
 					</div>
 				</form><!-- End Multi Columns Form -->
 

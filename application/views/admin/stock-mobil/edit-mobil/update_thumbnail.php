@@ -46,7 +46,7 @@
                 <?php endforeach; ?>
               </div>
 
-              <button type="submit" class="btn btn-sm btn-primary mt-3">Perbarui</button>
+              <button type="submit" class="btn btn-sm btn-warning mt-3"><i class="bi bi-pencil-square"></i> Perbarui</button>
             </form>
 
           </div>

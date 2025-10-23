@@ -49,7 +49,7 @@
 					<!-- Tombol -->
 					<div class="text-start mt-5">
                         <button type="submit" class="btn btn-primary btn-sm">
-                            <i class="bi bi-plus-circle"></i> Tambah
+                            <i class="bi bi-save"></i> Tambah
                         </button>
                         <a href="<?= base_url('admin/contacts') ?>" class="btn btn-secondary btn-sm">
                             <i class="bi bi-arrow-left-circle"></i> Kembali

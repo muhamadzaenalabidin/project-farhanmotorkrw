@@ -40,7 +40,7 @@
               <input type="hidden" name="id_unit" value="<?= $units->id_unit; ?>">
 
               <div class="row">
-                <?php foreach ($images as $g) : ?>
+                <?php foreach ($gambars as $g) : ?>
                   <div class="col-md-3 col-6 mb-4 text-center">
                     <img src="<?= base_url('storage/units/' . $g->nama_gambar); ?>" 
                          alt="gambar unit" 
@@ -62,7 +62,7 @@
                 <?php endforeach; ?>
               </div>
 
-              <button type="submit" class="btn btn-sm btn-primary mt-3">Simpan</button>
+              <button type="submit" class="btn btn-sm btn-primary mt-3"><i class="bi bi-save"></i> Simpan</button>
             </form>
 
           </div>

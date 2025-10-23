@@ -57,7 +57,7 @@
                           <a href="<?= base_url('admin/edit_merk/'.$merk['id_merk']); ?>" 
                              class="btn btn-warning tombol-edit" 
                              title="Edit Merk" data-bs-toggle="tooltip">
-                            <i class="bi bi-pencil-square"></i>
+                            <i class="bi bi-pencil"></i>
                           </a>
                           <a href="<?= base_url('admin/hapus_merk/'.$merk['id_merk']); ?>" 
                              class="btn btn-danger tombol-hapus" 

@@ -90,7 +90,7 @@
                     <td class="text-center">
                       <div class="btn-group btn-group-sm" role="group">
                         <a href="<?= base_url('admin/ubah_contact/'.$contact['id_contact']); ?>" class="btn btn-warning tombol-edit" title="Edit Kontak" data-bs-toggle="tooltip">
-                          <i class="bi bi-pencil-square"></i>
+                          <i class="bi bi-pencil"></i>
                         </a>
                         <a href="<?= base_url('admin/hapus_contact/'.$contact['id_contact']); ?>" class="btn btn-danger tombol-hapus" title="Hapus Kontak" data-bs-toggle="tooltip">
                           <i class="bi bi-trash"></i>

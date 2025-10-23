@@ -80,7 +80,7 @@
                         <a href="<?= base_url('admin/edit_slider/'.$slider['id_slider']); ?>" 
                            class="btn btn-warning tombol-edit" 
                            title="Edit Slider" data-bs-toggle="tooltip">
-                          <i class="bi bi-pencil-square"></i>
+                          <i class="bi bi-pencil"></i>
                         </a>
                         <a href="<?= base_url('admin/hapus_slider/'.$slider['id_slider']); ?>" 
                            class="btn btn-danger tombol-hapus" 

@@ -199,7 +199,7 @@ class Admin extends CI_Controller {
         $data['page'] = 'stocks';;
 
         $data['units']    = $this->AdminKelolaProducts->GetNameUnit($id_unit);
-        $data['images']  = $this->AdminGambar->getGambarByUnit($id_unit);
+        $data['gambars']  = $this->AdminGambar->getGambarByUnit($id_unit);
 
         $this->load->view('templates/admin/admin_top');
         $this->load->view('templates/admin/admin_header');
@@ -938,8 +938,7 @@ class Admin extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             // simpan error ke flashdata
-            $this->session->set_flashdata('flash', validation_errors('<div>- ', '</div>'));
-            $this->session->set_flashdata('flash_type', 'warning');
+            $this->session->set_flashdata('flashsoc', validation_errors());
 
             $this->load->view('templates/admin/admin_top');
             $this->load->view('templates/admin/admin_header');
@@ -956,13 +955,77 @@ class Admin extends CI_Controller {
             ];
 
             
-            $this->AdminMedsos->insertMedsos($dataInsert);
+            if($this->AdminMedsos->insertMedsos($dataInsert)){
+                $this->session->set_flashdata('flash', 'Berhasil menambah Akun Sosial Media!');
+                $this->session->set_flashdata('flash_type', 'success');
+            } else {
+                $this->session->set_flashdata('flash', 'Gagal menambah Akun Sosial Media!');
+                $this->session->set_flashdata('flash_type', 'warning');
+            }
 
-            $this->session->set_flashdata('flash', 'Sosmed berhasil ditambahkan!.');
+            redirect('admin/sosmed');
+        }
+    }
+
+
+    public function edit_sosmed($id_sosmed){
+        $this->load->model('AdminMedsos');
+
+        $data['page'] = 'sosialmedia';
+        $data['platform'] = $this->AdminMedsos->GetAllPlatform();
+        $data['medsos'] = $this->AdminMedsos->getMedsosById($id_sosmed);
+
+        $this->form_validation->set_rules('platform', 'platform', 'required|trim');
+        $this->form_validation->set_rules('username', 'username of sosmed', 'required|trim|callback_check_username_format');
+        $this->form_validation->set_rules('url', 'url of sosmed', 'required|trim');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/admin/admin_top');
+            $this->load->view('templates/admin/admin_header');
+            $this->load->view('templates/admin/admin_aside', $data);
+            $this->load->view('admin/media-sosial/edit-sosial/index', $data);
+            $this->load->view('templates/admin/admin_footer');
+        } else {
+
+            $username = '@' . ltrim($this->input->post('username', TRUE), '@'); // auto @
+            
+            $update = [
+                'id_platform' => $this->input->post('platform'),
+                'username'    => $username,
+                'url'         => $this->input->post('url')
+            ];
+
+            $this->AdminMedsos->UpdateSosmed($update, $id_sosmed);
+
+            $this->session->set_flashdata('flash', 'Kontak berhasil dihapus!.');
             $this->session->set_flashdata('flash_type', 'success');
             redirect('admin/sosmed');
         }
     }
+
+    public function check_username_format($username){
+        if (strpos($username, '@') !== 0) {
+            $this->form_validation->set_message('check_username_format', 'Username harus diawali dengan tanda "@"');
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    public function hapus_sosmed($id_sosmed){
+        $this->load->model('AdminMedsos');
+
+        $hapus = $this->AdminMedsos->deleteSosmed($id_sosmed);
+
+        if ($hapus) {
+            $this->session->set_flashdata('flash', 'Akun Sosial Media Dihapus!');
+            $this->session->set_flashdata('flash_type', 'success');
+        } else {
+            $this->session->set_flashdata('flash', 'Akun Sosial Media gagal dihapus!.');
+            $this->session->set_flashdata('flash_type', 'warning');
+        }
+    redirect('admin/sosmed');
+    }
+
 
 }
 

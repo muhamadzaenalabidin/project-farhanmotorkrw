@@ -99,12 +99,12 @@
                       <td>
                         <div class="dropdown">
                           <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Aksi">
-                            <i class="bi bi-pencil-square"></i>
+                            <i class="bi bi-pencil"></i>
                           </button>
                           <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                             <li>
                               <a class="dropdown-item tombol-edit" href="<?= base_url('admin/edit_data_unit/') . $unit->id_unit; ?>">
-                                <i class="bi bi-pencil me-2"></i> Data Unit
+                                <i class="bi bi-pencil-square me-2"></i> Data Unit
                               </a>
                             </li>
                             <li>
